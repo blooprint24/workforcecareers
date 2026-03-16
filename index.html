@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <!-- ================= HEAD / META / STYLES ================= -->
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Workforce Career Center | Career Training &amp; Job Placement</title>
+    
+    <!-- Dependencies -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1e3a8a",
+                        "accent-orange": "#f97316",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "25px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            .no-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .no-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+
+        /* SPA Transition Animations */
+        @keyframes fadeInSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInSlideLeft {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .animate-fade-in {
+            animation: fadeInSlideUp 0.6s ease-out forwards;
+            will-change: opacity, transform;
+        }
+        .animate-slide-in-image {
+            animation: fadeInSlideLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.15s;
+            opacity: 0; 
+            will-change: opacity, transform;
+        }
+        .fade-out {
+            opacity: 0 !important;
+            transition: opacity 0.3s ease-out !important;
+        }
+
+        /* News Ticker Animation */
+        @keyframes ticker-scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-ticker {
+            animation: ticker-scroll 25s linear infinite;
+        }
+        .ticker-container:hover .animate-ticker {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 overflow-x-hidden flex flex-col min-h-screen">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
+            
+            <!-- Logo -->
+            <a href="#" onclick="switchView('home')" class="inline-block py-2">
+                <img src="./wcc-logo.png" alt="Workforce Career Center Logo" class="h-16 md:h-20 lg:h-24 w-auto object-contain">
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center gap-8 relative z-[100]">
+                <!-- About WCC Dropdown -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-primary font-semibold hover:text-accent-orange transition-colors">
+                        About WCC <span class="material-symbols-outlined text-sm transition-transform group-hover:rotate-180">expand_more</span>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-primary text-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top rotate-0 scale-95 group-hover:scale-100 overflow-hidden">
+                        <a href="#about-mission" onclick="switchView('about-mission')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Our Mission</a>
+                        <a href="#about-who" onclick="switchView('about-who')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors">Who We Are</a>
+                    </div>
+                </div>
+
+                <!-- Services Dropdown -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-primary font-semibold hover:text-accent-orange transition-colors">
+                        Services <span class="material-symbols-outlined text-sm transition-transform group-hover:rotate-180">expand_more</span>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="absolute top-full left-0 mt-2 w-64 bg-primary text-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top rotate-0 scale-95 group-hover:scale-100 overflow-hidden">
+                        <a href="#services-business" onclick="switchView('services-business')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Business Solutions</a>
+                        <a href="#services-ticket" onclick="switchView('services-ticket')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Ticket to Work</a>
+                        <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors">Pre-Employment Services</a>
+                    </div>
+                </div>
+
+                <!-- Standard Links -->
+                <a href="#news" onclick="switchView('news')" class="text-primary font-semibold hover:text-accent-orange transition-colors">News</a>
+                <a href="#locations" onclick="switchView('locations')" class="text-primary font-semibold hover:text-accent-orange transition-colors">Locations</a>
+                <a href="#careers" class="text-primary font-semibold hover:text-accent-orange transition-colors">Careers</a>
+                <!-- Header CTA Button -->
+                <a href="tel:4045550123" class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">call</span>
+                    <span>Connect with Us</span>
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden text-primary p-2 hover:bg-slate-50 border border-transparent focus:border-slate-200 rounded-lg transition-colors z-[110] relative">
+                <span class="material-symbols-outlined text-3xl">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 bg-white shadow-2xl absolute w-full left-0 z-[105]">
+            <div class="px-4 pt-2 pb-6 space-y-1 max-h-[85vh] overflow-y-auto w-full">
+                <!-- Mobile CTA -->
+                <div class="py-4 px-2">
+                    <a href="tel:4045550123" class="w-full bg-primary text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg">
+                        <span class="material-symbols-outlined">call</span>
+                        <span>Connect with Us</span>
+                    </a>
+                </div>
+                <!-- Mobile: About WCC -->
+                <div class="py-2">
+                    <div class="font-bold text-slate-400 px-3 py-2 uppercase text-[11px] tracking-wider">About WCC</div>
+                    <a href="#about-mission" onclick="switchView('about-mission')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Our Mission</a>
+                    <a href="#about-who" onclick="switchView('about-who')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Who We Are</a>
+                </div>
+                <!-- Mobile: Services -->
+                <div class="py-2 border-t border-gray-100">
+                    <div class="font-bold text-slate-400 px-3 py-2 uppercase text-[11px] tracking-wider">Services</div>
+                    <a href="#services-business" onclick="switchView('services-business')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Business Solutions</a>
+                    <a href="#services-ticket" onclick="switchView('services-ticket')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Ticket to Work</a>
+                    <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Pre-Employment Services</a>
+                </div>
+                <!-- Mobile: Standard Links -->
+                <div class="py-2 border-t border-gray-100">
+                    <a href="#news" onclick="switchView('news')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">News</a>
+                    <a href="#locations" onclick="switchView('locations')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Locations</a>
+                    <a href="#careers" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Careers</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow w-full">
+        <!-- SPA VIEWS CONTAINER -->
+        
+        <!-- HOME VIEW -->
+        <div id="view-home" class="view-section block">
+        <!-- HERO SECTION -->
+        <section class="relative w-full bg-slate-900 min-h-[750px] flex items-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img alt="Smiling career student" class="w-full h-full object-cover opacity-100 lg:opacity-50" src="./hero-image.jpg"/>
+                <div class="absolute inset-0 bg-slate-900/60 lg:bg-transparent lg:bg-gradient-to-l lg:from-slate-900/90 lg:via-slate-900/40 lg:to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+                
+                <div id="hero-form" class="bg-white p-0 rounded-2xl shadow-2xl max-w-md mx-auto lg:mr-auto w-full border border-slate-100 order-2 lg:order-1 overflow-hidden">
+                    <iframe 
+                        src="https://api.leadconnectorhq.com/widget/survey/UfbT7L2i352WMkVZaO7g" 
+                        style="border:none;width:100%;display:block;min-height:550px;" 
+                        scrolling="no" 
+                        id="UfbT7L2i352WMkVZaO7g" 
+                        title="survey">
+                    </iframe>
+                    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+                </div>
+
+                <div class="text-white space-y-6 order-1 lg:order-2 text-center lg:text-left">
+                    <span class="inline-block px-4 py-1 bg-accent-orange/20 border border-accent-orange/50 rounded-full text-xs font-bold tracking-widest uppercase text-accent-orange">
+                        CHANGING YOUR CAREER. CAN CHANGE YOUR LIFE
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-black leading-[1.1] tracking-tight">
+                        Get Trained, Get Certified, <br/><span class="text-accent-orange text-5xl md:text-7xl">Get Job Placement</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-200 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Join over 8,000 students who made the decision to change their lives. With flexible programs designed to remove excuses and create real opportunity for working adults.
+                    </p>
+
+                    <div class="flex items-center justify-center lg:justify-start gap-4 md:gap-6 pt-4">
+                        <div class="flex flex-col">
+                            <span class="text-2xl md:text-3xl font-bold text-white">25+</span>
+                            <span class="text-slate-400 text-[10px] md:text-sm uppercase font-semibold">Schools</span>
+                        </div>
+                        <div class="h-10 w-px bg-slate-700"></div>
+                        <div class="flex flex-col">
+                            <span class="text-2xl md:text-3xl font-bold text-accent-orange">25+</span>
+                            <span class="text-slate-400 text-[10px] md:text-sm uppercase font-semibold">Programs</span>
+                        </div>
+                        <div class="h-10 w-px bg-slate-700"></div>
+                        <div class="flex flex-col">
+                            <span class="text-2xl md:text-3xl font-bold text-white">35+</span>
+                            <span class="text-slate-400 text-[10px] md:text-sm uppercase font-semibold">Jobs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div> <!-- END HOME VIEW -->
+
+        <!-- ABOUT: OUR MISSION VIEW -->
+        <div id="view-about-mission" class="view-section hidden bg-white">
+            <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 order-1">
+                    <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tight">Impacting Lives.</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        At <strong class="text-slate-900">Workforce Career Center (WCC)</strong>, our mission is simple but powerful: <strong>create real opportunities that change lives.</strong> Through our innovative <strong>model</strong>, we bring together trusted training providers, industry experts, and workforce partners under one roof to deliver hands-on career training across multiple high-demand industries.
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        By creating a centralized hub for education and workforce development, WCC expands access to a wide range of career pathways. From construction and skilled trades to healthcare, technology, transportation, and emerging industries, our partner schools and instructors provide the training and certifications individuals need to move confidently into the workforce.
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Our team works every day to remove barriers to opportunity by connecting students with training, career resources, and employer partnerships that lead directly to employment. Together with our training partners, employers, and community organizations, we are committed to <strong>building stronger communities, advancing local economies, and transforming lives — one career at a time.</strong>
+                    </p>
+                    <div class="pt-6">
+                        <button onclick="scrollToForm()" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all hover:shadow-lg flex items-center gap-2">
+                            Partner With Us <span class="material-symbols-outlined text-sm text-accent-orange">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="order-2 rounded-3xl rounded-tl-[80px] rounded-br-[80px] overflow-hidden shadow-2xl h-[400px] lg:h-[600px] animate-slide-in-image relative">
+                    <img src="./mission-image.jpg" alt="Team collaborating" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT: WHO WE ARE VIEW -->
+        <div id="view-about-who" class="view-section hidden bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 rounded-3xl rounded-tr-[80px] rounded-bl-[80px] overflow-hidden shadow-2xl h-[400px] lg:h-[600px] animate-slide-in-image relative">
+                    <img src="./who-we-are-image.jpg" alt="Professionals working" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-6 order-1 lg:order-2">
+                    <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tight">Who We Are</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        <strong>Workforce Career Center (WCC)</strong> is an innovative workforce development hub where multiple training providers and industry experts come together under one roof to deliver high-quality career training and certification programs.
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Rather than operating as a traditional school, WCC serves as a <strong>collaborative training ecosystem</strong> that brings together specialized schools, instructors, and workforce partners to offer a wide range of in-demand career pathways. From skilled trades and healthcare to technology and emerging industries, our facilities provide the space, infrastructure, and support services that allow trusted training providers to educate and certify the next generation of workers.
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Through strong partnerships with employers, workforce agencies, and community organizations, WCC ensures that training programs are aligned with real labor market demand. By expanding access to education, removing barriers to training, and connecting students directly to employment opportunities, we help individuals launch sustainable careers while strengthening the workforce in the communities we serve.
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Together with our partners, WCC is redefining workforce training by creating <strong>a centralized destination where opportunity, education, and career advancement meet.</strong>
+                    </p>
+                    <div class="pt-6">
+                        <button onclick="scrollToForm()" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all hover:shadow-lg flex items-center gap-2">
+                            Contact an Expert <span class="material-symbols-outlined text-sm text-accent-orange">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SERVICES: BUSINESS SOLUTIONS VIEW -->
+        <div id="view-services-business" class="view-section hidden bg-white">
+            <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-6 order-1">
+                    <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tight">Business Solutions</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        At <strong>Workforce Career Center (WCC)</strong>, we take a hands-on, partnership-driven approach to working with employers. Our team collaborates closely with businesses to understand their workforce needs, operational challenges, and long-term hiring goals. Using this insight, we design customized training and recruitment solutions that connect companies with skilled, job-ready talent.
+                    </p>
+                    <h3 class="text-2xl font-bold text-slate-900 mt-8 mb-4">Benefits to Employers</h3>
+                    <!-- Employer Benefits Grid -->
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                            <span class="material-symbols-outlined text-accent-orange mt-0.5">payments</span>
+                            <span class="text-slate-700 font-medium">Reduced recruitment and onboarding costs</span>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                            <span class="material-symbols-outlined text-accent-orange mt-0.5">groups</span>
+                            <span class="text-slate-700 font-medium">Access to a diverse pipeline of trained and certified candidates</span>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                            <span class="material-symbols-outlined text-accent-orange mt-0.5">trending_up</span>
+                            <span class="text-slate-700 font-medium">Improved employee retention through work-based learning pathways</span>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                            <span class="material-symbols-outlined text-accent-orange mt-0.5">request_quote</span>
+                            <span class="text-slate-700 font-medium">Opportunities to leverage workforce development grants, tax incentives, and training subsidies</span>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                            <span class="material-symbols-outlined text-accent-orange mt-0.5">handshake</span>
+                            <span class="text-slate-700 font-medium">Direct engagement with training providers to shape curriculum and workforce pipelines</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-8">
+                        <button onclick="scrollToForm()" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all hover:shadow-lg flex items-center gap-2">
+                            Partner With Us <span class="material-symbols-outlined text-sm text-accent-orange">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="order-2 rounded-3xl rounded-tl-[80px] rounded-br-[80px] overflow-hidden shadow-2xl h-[400px] lg:h-full lg:min-h-[700px] sticky top-32 animate-slide-in-image relative">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Business professionals" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- SERVICES: TICKET TO WORK VIEW -->
+        <div id="view-services-ticket" class="view-section hidden bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="order-2 lg:order-1 lg:col-span-4 rounded-3xl rounded-tr-[80px] rounded-bl-[80px] overflow-hidden shadow-2xl h-[300px] lg:h-[500px] sticky top-32 animate-slide-in-image relative">
+                    <img src="./ticket-to-work-image.jpg" alt="Documents and planning" class="w-full h-full object-cover">
+                </div>
+                <div class="order-1 lg:order-2 lg:col-span-8 space-y-6">
+                    <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tight">About Ticket to Work</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        The <strong>Ticket to Work and Self Sufficiency (Ticket) Program</strong> is a Federally-funded employment program designed to provide Social Security disability beneficiaries the choices, opportunities and support they need to enter the workforce and maintain employment with the goal of becoming economically self-supporting over time.
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        This section of the website provides basic facts about the Ticket to Work Program, including some historical information and information on the Ticket to Work Program partners at the national, state and local levels.
+                    </p>
+                    
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 mt-8">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-accent-orange">workHistory</span> Services at a Glance
+                        </h3>
+                        <p class="text-slate-600 mb-6">WCC provides a range of services including:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent-orange text-lg">check_circle</span>
+                                <span class="text-slate-700 font-medium">Vocational counseling and guidance</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent-orange text-lg">check_circle</span>
+                                <span class="text-slate-700 font-medium">Job placement assistance</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent-orange text-lg">check_circle</span>
+                                <span class="text-slate-700 font-medium">College/vocational training</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent-orange text-lg">check_circle</span>
+                                <span class="text-slate-700 font-medium">Supported employment services</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent-orange text-lg">check_circle</span>
+                                <span class="text-slate-700 font-medium">Skills training</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent-orange text-lg">check_circle</span>
+                                <span class="text-slate-700 font-medium">Job coaching/tutoring</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent-orange text-lg">check_circle</span>
+                                <span class="text-slate-700 font-medium">Transportation</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent-orange text-lg">check_circle</span>
+                                <span class="text-slate-700 font-medium">Interpreter services</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent-orange text-lg">check_circle</span>
+                                <span class="text-slate-700 font-medium">Services to transition-age youth</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-accent-orange text-lg">check_circle</span>
+                                <span class="text-slate-700 font-medium text-sm">Assistive technology and rehab services</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-6">
+                        <button onclick="scrollToForm()" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all hover:shadow-lg flex items-center gap-2">
+                            Contact an Expert <span class="material-symbols-outlined text-sm text-accent-orange">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SERVICES: PRE-EMPLOYMENT VIEW -->
+        <div id="view-services-pre-employment" class="view-section hidden bg-white">
+            <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 order-1">
+                    <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tight">Pre-Employment Transition Services</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Pre-Employment Services (Pre-ETS) can be provided to both potentially eligible students or VR eligible customers. The five (5) Pre-ETS required under WIOA that Georgia Vocational Rehabilitation Agency (GVRA) provides are:
+                    </p>
+                    <ul class="space-y-3 mt-4 mb-6">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-accent-orange mt-1 text-xl">explore</span>
+                            <span class="text-slate-700 text-lg">Job exploration counseling</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-accent-orange mt-1 text-xl">school</span>
+                            <span class="text-slate-700 text-lg">Counseling on post-secondary opportunities</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-accent-orange mt-1 text-xl">engineering</span>
+                            <span class="text-slate-700 text-lg">Workplace readiness training</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-accent-orange mt-1 text-xl">work</span>
+                            <span class="text-slate-700 text-lg">Work-based learning</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-accent-orange mt-1 text-xl">record_voice_over</span>
+                            <span class="text-slate-700 text-lg">Self-advocacy instruction</span>
+                        </li>
+                    </ul>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Transition services are more intensive, individualized services provided under an Individualized Plan for Employment (IPE). The IPE is developed with the student and outlines intermediate objectives, funding sources, partners, and resources necessary to support a successful transition into competitive integrated employment.
+                    </p>
+                    <div class="bg-slate-50 p-6 rounded-xl border-l-4 border-accent-orange shadow-sm mt-8">
+                        <h4 class="font-bold text-slate-900 text-xl mb-2">Eligibility</h4>
+                        <p class="text-slate-600">
+                            A student is eligible for Pre-ETS if they are at least 14 years old and have not yet turned 22, and are enrolled in an educational program with an Individualized Education Plan (IEP), 504 plan, or other disability documentation.
+                        </p>
+                    </div>
+                    <div class="pt-6">
+                        <button onclick="scrollToForm()" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all hover:shadow-lg flex items-center gap-2">
+                            Partner With Us <span class="material-symbols-outlined text-sm text-accent-orange">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="order-2 rounded-3xl rounded-tl-[80px] rounded-br-[80px] overflow-hidden shadow-2xl h-[400px] lg:h-[700px] animate-slide-in-image relative">
+                    <img src="./pre-employment-image.jpg" alt="Training and counseling session" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- NEWS VIEW -->
+        <div id="view-news" class="view-section hidden bg-slate-50">
+            <!-- Live Ticker -->
+            <div class="bg-primary border-b border-primary-light/20 w-full overflow-hidden ticker-container py-3">
+                <div class="whitespace-nowrap inline-block animate-ticker text-accent-orange font-bold text-sm tracking-widest uppercase">
+                    <span class="mx-8">BREAKING: WCC Expands Trade School Programs into Three New States</span>
+                    <span class="text-white mx-4">•</span>
+                    <span class="mx-8">New Partnership Opportunities for Employers Now Available</span>
+                    <span class="text-white mx-4">•</span>
+                    <span class="mx-8">Over 8,000 Students Placed in High-Demand Careers</span>
+                    <span class="text-white mx-4">•</span>
+                    <span class="mx-8">BREAKING: WCC Expands Trade School Programs into Three New States</span>
+                    <span class="text-white mx-4">•</span>
+                    <span class="mx-8">New Partnership Opportunities for Employers Now Available</span>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 py-16 md:py-24">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tight mb-4">WCC In The News</h2>
+                    <p class="text-lg text-slate-600 max-w-2xl mx-auto">Discover how Workforce Career Center is making headlines and transforming the landscape of career education and job placement.</p>
+                </div>
+                
+                <!-- News Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Yahoo Finance Card -->
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
+                        <div class="h-48 bg-slate-200 relative overflow-hidden">
+                            <img src="./yahoo-finance-image.jpg" alt="Team collaborating" class="w-full h-full object-cover">
+                            <div class="absolute top-4 left-4 bg-purple-700 text-white text-xs font-bold px-3 py-1 rounded-full">Yahoo Finance</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-slate-900 mb-3 line-clamp-2">Workforce Career Center Announces Major Trade School Expansion</h3>
+                            <p class="text-slate-600 mb-6 flex-grow line-clamp-3">WCC is aggressively expanding its footprint to provide critical trade infrastructure and education to underserved communities.</p>
+                            <a href="https://finance.yahoo.com/news/workforce-career-center-trade-school-114600300.html?guccounter=1" target="_blank" class="inline-flex items-center justify-center w-full bg-slate-50 hover:bg-slate-100 text-primary border border-slate-200 font-bold py-3 px-4 rounded-xl transition-colors">
+                                Read Full Article <span class="material-symbols-outlined text-sm ml-2 text-accent-orange">open_in_new</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Fox 5 Atlanta Card -->
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
+                        <div class="h-48 bg-slate-200 relative overflow-hidden">
+                            <img src="./fox5-image.jpg" alt="Fox 5 interview" class="w-full h-full object-cover">
+                            <div class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">Fox 5 Atlanta</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Local News Feature: Changing Lives Through Education</h3>
+                            <p class="text-slate-600 mb-6 flex-grow">Fox 5 Atlanta goes inside WCC to see exactly how hands-on training is building the next generation of essential workers.</p>
+                            <a href="https://www.fox5atlanta.com/video/1682873" target="_blank" class="w-full bg-accent-orange hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-xl transition-colors shadow-sm flex items-center justify-center gap-2 mt-auto">
+                                Watch Video <span class="material-symbols-outlined text-sm">play_arrow</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- YouTube Spotlight Card -->
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
+                        <div class="relative pt-[56.25%] bg-slate-900 w-full overflow-hidden">
+                            <iframe 
+                                class="absolute top-0 left-0 w-full h-full"
+                                src="https://www.youtube.com/embed/rW1j7nnFXcA" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                            </iframe>
+                            <div class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full z-10 pointer-events-none shadow-sm">WCC Spotlight</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">The WCC Difference: Student Success Stories</h3>
+                            <p class="text-slate-600 mb-6 flex-grow">Hear directly from our graduates about how fast-tracked certification programs helped them land their dream jobs.</p>
+                            <a href="https://youtu.be/rW1j7nnFXcA?si=7L7Xq-NAwwoDB0f3" target="_blank" class="w-full bg-accent-orange hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-xl transition-colors shadow-sm flex items-center justify-center gap-2 mt-auto">
+                                Watch Video <span class="material-symbols-outlined text-sm">play_arrow</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- LOCATIONS VIEW -->
+        <div id="view-locations" class="view-section hidden bg-white">
+            <div class="max-w-7xl mx-auto px-4 py-16 md:py-24">
+                
+                <div class="text-center mb-16">
+                    <span class="inline-block px-4 py-1 bg-accent-orange/10 border border-accent-orange/30 rounded-full text-xs font-bold tracking-widest uppercase text-accent-orange mb-4">
+                        Expanding Opportunities Across the Southeast
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tight">Our Locations</h2>
+                    <p class="text-lg text-slate-600 max-w-2xl mx-auto mt-4">We are bringing hands-on training and real career opportunities to communities across the Southeast.</p>
+                              <!-- Horizontal Location Journey Timeline -->
+                <div class="max-w-4xl mx-auto w-full mb-16 px-4">
+                    
+                    <div class="relative flex flex-col md:flex-row justify-between items-center py-10">
+                        <!-- Connecting Line (Vertical on Mobile, Horizontal on Desktop) -->
+                        <div class="absolute top-0 bottom-0 left-[23.5px] md:top-[43px] md:left-8 md:right-8 md:h-[4px] md:bottom-auto bg-primary/20 w-[4px] md:w-auto rounded-full z-0"></div>
+
+                        <!-- Texas Node -->
+                        <div class="relative z-10 flex md:flex-col items-center group cursor-pointer w-full md:w-auto mb-8 md:mb-0" onmouseenter="showLocation('texas')">
+                            <div class="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14">
+                                <span class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-10 group-hover:scale-150 transition-transform duration-500"></span>
+                                <span id="node-texas" class="loc-node relative inline-flex rounded-full w-4 h-4 md:w-6 md:h-6 bg-primary items-center justify-center shadow-lg border-[3px] border-white transition-all duration-300 transform group-hover:scale-125">
+                                </span>
+                            </div>
+                            <div class="ml-4 md:ml-0 md:mt-4 text-left md:text-center w-full">
+                                <h3 id="label-texas" class="loc-label text-xl font-black text-slate-400 transition-colors duration-300">Texas</h3>
+                                <p class="text-slate-400 text-sm font-medium">Regional Hub</p>
+                            </div>
+                        </div>
+
+                        <!-- Georgia Node (Active by Default) -->
+                        <div class="relative z-10 flex md:flex-col items-center group cursor-pointer w-full md:w-auto mb-8 md:mb-0" onmouseenter="showLocation('georgia')">
+                            <!-- HQ Badge -->
+                            <div class="absolute -top-3 left-10 md:-top-4 md:left-1/2 md:-translate-x-1/2 bg-accent-orange text-white text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded shadow-sm z-20">HQ</div>
+                            
+                            <div class="relative flex items-center justify-center w-12 h-12 md:w-16 md:h-16">
+                                <span class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-20 group-hover:scale-150 transition-transform duration-500 delay-75"></span>
+                                <span id="node-georgia" class="loc-node active relative inline-flex rounded-full w-6 h-6 md:w-8 md:h-8 bg-primary items-center justify-center shadow-lg border-[4px] border-white transition-all duration-300 transform scale-125 ring-4 ring-primary/30">
+                                </span>
+                            </div>
+                            <div class="ml-4 md:ml-0 md:mt-4 text-left md:text-center w-full">
+                                <h3 id="label-georgia" class="loc-label active text-2xl font-black text-primary transition-colors duration-300">Georgia</h3>
+                                <p class="text-primary/70 text-sm font-medium">Headquarters</p>
+                            </div>
+                        </div>
+
+                        <!-- Florida Node -->
+                        <div class="relative z-10 flex md:flex-col items-center group cursor-pointer w-full md:w-auto" onmouseenter="showLocation('florida')">
+                            <div class="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14">
+                                <span class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-10 group-hover:scale-150 transition-transform duration-500 delay-150"></span>
+                                <span id="node-florida" class="loc-node relative inline-flex rounded-full w-4 h-4 md:w-6 md:h-6 bg-primary items-center justify-center shadow-lg border-[3px] border-white transition-all duration-300 transform group-hover:scale-125">
+                                </span>
+                            </div>
+                            <div class="ml-4 md:ml-0 md:mt-4 text-left md:text-center w-full">
+                                <h3 id="label-florida" class="loc-label text-xl font-black text-slate-400 transition-colors duration-300">Florida</h3>
+                                <p class="text-slate-400 text-sm font-medium">Regional Hub</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Dynamic Location Card Details -->
+                <div class="max-w-lg mx-auto w-full">
+                    <div id="loc-details-card" class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8 flex flex-col items-center text-center transition-all duration-500 transform translate-y-0 opacity-100">
+                        
+                        <div class="h-16 w-16 bg-blue-50 rounded-full flex items-center justify-center mb-6 shadow-inner">
+                            <span class="material-symbols-outlined text-3xl text-primary drop-shadow-sm">location_city</span>
+                        </div>
+                        
+                        <h3 id="dynamic-loc-title" class="text-3xl font-black text-slate-900 mb-2">Georgia</h3>
+                        <p id="dynamic-loc-subtitle" class="text-slate-500 font-medium mb-6 uppercase tracking-widest text-sm">Headquarters</p>
+                        
+                        <hr class="w-16 border-slate-200 mb-6"/>
+                        
+                        <p id="dynamic-loc-address" class="text-slate-600 mb-8 flex-grow text-lg leading-relaxed font-medium">
+                            5678 Progress Blvd<br/>Building A<br/>Atlanta, GA 30301
+                        </p>
+                        
+                        <a id="dynamic-loc-btn" href="tel:1-800-WORKFORCE" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2">
+                            <span>Connect with Us</span>
+                            <span class="material-symbols-outlined text-lg">chat_bubble</span>
+                        </a>
+                    </div>
+                </div>
+    </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center gap-8 text-center">
+            <!-- Footer Logo -->
+            <a href="#" onclick="switchView('home')" class="inline-block">
+                <img src="./wcc-logo.png" alt="Workforce Career Center Logo" class="h-16 md:h-20 lg:h-24 w-auto object-contain">
+            </a>
+            
+            <!-- Link & Copyright Container -->
+            <div class="text-[11px] md:text-xs text-slate-600 font-medium tracking-wide">
+                <p>
+                    Copyright 2024 | Workforce Career Center™ | 
+                    <a href="#" class="text-primary hover:text-accent-orange transition-colors">Terms &amp; Conditions</a> | 
+                    <a href="#" class="text-primary hover:text-accent-orange transition-colors">Privacy Policy</a> | 
+                    All Rights Reserved
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- View Switcher & Interactive Script -->
+    <script>
+        function switchView(viewId) {
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+
+            const targetView = document.getElementById('view-' + viewId) || document.getElementById('view-home');
+            const activeView = document.querySelector('.view-section.block');
+            
+            // Do nothing if clicking the currently active view
+            if (activeView === targetView) return;
+
+            if (activeView) {
+                // Apply fade out animation
+                activeView.classList.add('fade-out');
+                
+                // Wait for fade out to complete before swapping
+                setTimeout(() => {
+                    // Hide old view completely
+                    activeView.classList.remove('block', 'animate-fade-in', 'fade-out');
+                    activeView.classList.add('hidden');
+                    
+                    // Show new view
+                    showTargetView(targetView);
+                }, 300); // matches the 0.3s transition duration
+            } else {
+                showTargetView(targetView);
+            }
+        }
+
+        function showTargetView(targetView) {
+            targetView.classList.remove('hidden');
+            targetView.classList.add('block', 'animate-fade-in');
+            
+            // Re-trigger image animation on target view
+            const targetImgs = targetView.querySelectorAll('.animate-slide-in-image');
+            targetImgs.forEach(img => {
+                img.style.animation = 'none';
+                img.offsetHeight; /* trigger reflow */
+                img.style.animation = null;
+            });
+            
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+
+        // --- Location Journey Script ---
+        const locationData = {
+            texas: {
+                title: "Texas",
+                subtitle: "Regional Hub",
+                address: "1234 Opportunity Way<br/>Suite 100<br/>Dallas, TX 75001"
+            },
+            georgia: {
+                title: "Georgia",
+                subtitle: "Headquarters",
+                address: "5678 Progress Blvd<br/>Building A<br/>Atlanta, GA 30301"
+            },
+            florida: {
+                title: "Florida",
+                subtitle: "Regional Hub",
+                address: "9012 Future Rd<br/>Suite 50<br/>Orlando, FL 32801"
+            }
+        };
+
+        let lastLoc = 'georgia';
+
+        function showLocation(locKey) {
+            if (locKey === lastLoc) return;
+            lastLoc = locKey;
+
+            // 1. Reset all nodes & labels
+            document.querySelectorAll('.loc-node').forEach(node => {
+                node.classList.remove('scale-125', 'ring-4', 'ring-primary/30', 'w-6', 'h-6', 'md:w-8', 'md:h-8');
+                node.classList.add('w-4', 'h-4', 'md:w-6', 'md:h-6');
+            });
+            document.querySelectorAll('.loc-label').forEach(label => {
+                label.classList.remove('text-2xl', 'text-primary');
+                label.classList.add('text-xl', 'text-slate-400');
+            });
+
+            // 2. Highlight selected node
+            const targetNode = document.getElementById('node-' + locKey);
+            targetNode.classList.remove('w-4', 'h-4', 'md:w-6', 'md:h-6');
+            targetNode.classList.add('scale-125', 'ring-4', 'ring-primary/30', 'w-6', 'h-6', 'md:w-8', 'md:h-8');
+            
+            const targetLabel = document.getElementById('label-' + locKey);
+            targetLabel.classList.remove('text-xl', 'text-slate-400');
+            targetLabel.classList.add('text-2xl', 'text-primary');
+
+            // 3. Animate out the card content (Fade-down/out)
+            const card = document.getElementById('loc-details-card');
+            card.classList.remove('translate-y-0', 'opacity-100');
+            card.classList.add('translate-y-8', 'opacity-0');
+
+            // 4. Update content and animate back in (Fade-up/in) after short delay
+            setTimeout(() => {
+                document.getElementById('dynamic-loc-title').innerText = locationData[locKey].title;
+                document.getElementById('dynamic-loc-subtitle').innerText = locationData[locKey].subtitle;
+                document.getElementById('dynamic-loc-address').innerHTML = locationData[locKey].address;
+                
+                // Trigger reflow to restart animation/transition
+                card.offsetHeight; 
+                
+                card.classList.remove('translate-y-8', 'opacity-0');
+                card.classList.add('translate-y-0', 'opacity-100');
+            }, 300);
+        }
+
+        function scrollToForm() {
+            // Switch back to home
+            switchView('home');
+            
+            // Wait slightly so home view can fade back in if we were off-page
+            setTimeout(() => {
+                const formObj = document.getElementById('hero-form');
+                if (formObj) {
+                    // Scroll into view with smooth animation
+                    formObj.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Add a brief highlight glow to draw attention
+                    formObj.classList.add('ring-4', 'ring-accent-orange', 'ring-offset-4', 'ring-offset-slate-900', 'transition-all', 'duration-500');
+                    
+                    // Remove highlight after 2.5 seconds
+                    setTimeout(() => {
+                        formObj.classList.remove('ring-4', 'ring-accent-orange', 'ring-offset-4', 'ring-offset-slate-900');
+                    }, 2500);
+                }
+            }, 350);
+        }
+    </script>
+</body>
+</html>
