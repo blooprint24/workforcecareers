@@ -120,14 +120,15 @@
                     <div class="absolute top-full left-0 mt-2 w-64 bg-primary text-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top rotate-0 scale-95 group-hover:scale-100 overflow-hidden">
                         <a href="#services-business" onclick="switchView('services-business')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Business Solutions</a>
                         <a href="#services-ticket" onclick="switchView('services-ticket')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Ticket to Work</a>
-                        <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors">Pre-Employment Services</a>
+                        <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Pre-Employment Services</a>
+                        <a href="#partnership" onclick="switchView('partnership')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors">Partnership Form</a>
                     </div>
                 </div>
 
                 <!-- Standard Links -->
                 <a href="#news" onclick="switchView('news')" class="text-primary font-semibold hover:text-accent-orange transition-colors">News</a>
                 <a href="#locations" onclick="switchView('locations')" class="text-primary font-semibold hover:text-accent-orange transition-colors">Locations</a>
-                <a href="#careers" class="text-primary font-semibold hover:text-accent-orange transition-colors">Careers</a>
+                <a href="#careers" onclick="switchView('careers')" class="text-primary font-semibold hover:text-accent-orange transition-colors">Careers</a>
                 <!-- Header CTA Button -->
                 <a href="tel:4045550123" class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2">
                     <span class="material-symbols-outlined text-sm">call</span>
@@ -163,12 +164,13 @@
                     <a href="#services-business" onclick="switchView('services-business')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Business Solutions</a>
                     <a href="#services-ticket" onclick="switchView('services-ticket')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Ticket to Work</a>
                     <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Pre-Employment Services</a>
+                    <a href="#partnership" onclick="switchView('partnership')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Partnership Form</a>
                 </div>
                 <!-- Mobile: Standard Links -->
                 <div class="py-2 border-t border-gray-100">
                     <a href="#news" onclick="switchView('news')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">News</a>
                     <a href="#locations" onclick="switchView('locations')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Locations</a>
-                    <a href="#careers" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Careers</a>
+                    <a href="#careers" onclick="switchView('careers')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Careers</a>
                 </div>
             </div>
         </div>
@@ -615,7 +617,7 @@
                         <hr class="w-16 border-slate-200 mb-6"/>
                         
                         <p id="dynamic-loc-address" class="text-slate-600 mb-8 flex-grow text-lg leading-relaxed font-medium">
-                            5678 Progress Blvd<br/>Building A<br/>Atlanta, GA 30301
+                            1073 Huff Rd NW<br/>Suite C<br/>Atlanta, GA 30318
                         </p>
                         
                         <a id="dynamic-loc-btn" href="tel:1-800-WORKFORCE" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2">
@@ -624,7 +626,139 @@
                         </a>
                     </div>
                 </div>
-    </div>
+            </div>
+        </div>
+
+        <!-- PARTNERSHIP VIEW -->
+        <div id="view-partnership" class="view-section hidden bg-white">
+            <div class="max-w-7xl mx-auto px-4 py-16 md:py-24">
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                    <!-- Left: Partnership Info -->
+                    <div class="space-y-8">
+                        <div>
+                            <span class="inline-block px-4 py-1 bg-primary/10 border border-primary/20 rounded-full text-xs font-bold tracking-widest uppercase text-primary mb-4">
+                                Empowering Businesses Together
+                            </span>
+                            <h2 class="text-4xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight">Partner with Workforce Career Center</h2>
+                            <p class="text-xl text-slate-600 mt-6 leading-relaxed">
+                                Join our network of industry leaders to bridge the skill gap and build a stronger, more inclusive workforce.
+                            </p>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-accent-orange">diversity_3</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900">Customized Solutions</h4>
+                                    <p class="text-slate-600 text-sm">Tailored recruitment and training programs that meet your specific operational needs.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-primary">school</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900">Mall of Schools Model</h4>
+                                    <p class="text-slate-600 text-sm">Access a diverse pipeline of talent from multiple specialized training providers.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-green-600">trending_up</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900">Sustainable Growth</h4>
+                                    <p class="text-slate-600 text-sm">Reduce recruitment costs and improve employee retention through work-based learning.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Expert Link -->
+                        <div class="pt-8 border-t border-slate-100">
+                            <p class="text-slate-600 mb-4 font-medium">Have specific questions?</p>
+                            <a href="mailto:Contact@WorkforceCareers.com" class="inline-flex items-center gap-2 text-primary font-bold hover:text-accent-orange transition-colors group">
+                                <span class="material-symbols-outlined">support_agent</span>
+                                <span>Contact an Expert</span>
+                                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Partnership Form -->
+                    <div class="bg-slate-50 p-8 md:p-10 rounded-[2.5rem] shadow-2xl border border-white relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-black text-slate-900 mb-6">Partnership Inquiry</h3>
+                            <form action="#" class="space-y-5">
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <div class="space-y-1">
+                                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">First Name</label>
+                                        <input type="text" placeholder="John" class="w-full px-5 py-4 bg-white border border-slate-100 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-medium text-slate-900 placeholder:text-slate-300">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Last Name</label>
+                                        <input type="text" placeholder="Doe" class="w-full px-5 py-4 bg-white border border-slate-100 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-medium text-slate-900 placeholder:text-slate-300">
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Company They Represent</label>
+                                    <input type="text" placeholder="Acme Corp" class="w-full px-5 py-4 bg-white border border-slate-100 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-medium text-slate-900 placeholder:text-slate-300">
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <div class="space-y-1">
+                                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Phone Number</label>
+                                        <input type="tel" placeholder="(555) 000-0000" class="w-full px-5 py-4 bg-white border border-slate-100 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-medium text-slate-900 placeholder:text-slate-300">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Email Address</label>
+                                        <input type="email" placeholder="john@company.com" class="w-full px-5 py-4 bg-white border border-slate-100 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-medium text-slate-900 placeholder:text-slate-300">
+                                    </div>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Tell us about your organization</label>
+                                    <textarea rows="4" placeholder="How would you like to partner with us?" class="w-full px-5 py-4 bg-white border border-slate-100 rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-medium text-slate-900 placeholder:text-slate-300"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-black py-5 rounded-2xl transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 active:scale-95 text-lg tracking-tight">
+                                    Submit Inquiry
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAREERS VIEW -->
+        <div id="view-careers" class="view-section hidden bg-slate-50">
+            <div class="max-w-4xl mx-auto px-4 py-16 md:py-24 text-center">
+                <span class="inline-block px-4 py-1 bg-accent-orange/10 border border-accent-orange/30 rounded-full text-xs font-bold tracking-widest uppercase text-accent-orange mb-4">
+                    Join Our Mission
+                </span>
+                <h2 class="text-4xl md:text-6xl font-black text-primary tracking-tight mb-8">Career Opportunities</h2>
+                
+                <!-- Career Flyer Placeholder -->
+                <div class="bg-white p-4 md:p-8 rounded-[3rem] shadow-2xl border border-slate-100 mb-12 relative overflow-hidden group">
+                    <div class="aspect-[1/1.4] w-full bg-slate-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-slate-200 relative">
+                        <div class="text-center p-8">
+                            <span class="material-symbols-outlined text-8xl text-slate-300 mb-4 group-hover:scale-110 transition-transform duration-500">article</span>
+                            <h3 class="text-2xl font-bold text-slate-800 mb-2">Career Flyer Coming Soon</h3>
+                            <p class="text-slate-500 max-w-sm mx-auto">We are currently updating our latest career opportunities and training schedules. Check back shortly!</p>
+                        </div>
+                        
+                        <!-- Premium Overlay for placeholder -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50"></div>
+                    </div>
+                </div>
+
+                <div class="bg-primary rounded-3xl p-8 md:p-12 text-white shadow-2xl">
+                    <h3 class="text-2xl md:text-3xl font-black mb-4">Ready to start your journey?</h3>
+                    <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">Our experts are ready to help you find the right path for your career goals. Reach out today for a consultation.</p>
+                    <a href="mailto:Contact@WorkforceCareers.com" class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-2xl font-black text-lg hover:bg-accent-orange hover:text-white transition-all shadow-lg hover:-translate-y-1">
+                        <span class="material-symbols-outlined">mail</span>
+                        <span>Contact an Expert</span>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -703,17 +837,17 @@
             texas: {
                 title: "Texas",
                 subtitle: "Regional Hub",
-                address: "1234 Opportunity Way<br/>Suite 100<br/>Dallas, TX 75001"
+                address: "Opening Fall 2026"
             },
             georgia: {
                 title: "Georgia",
                 subtitle: "Headquarters",
-                address: "5678 Progress Blvd<br/>Building A<br/>Atlanta, GA 30301"
+                address: "1073 Huff Rd NW<br/>Suite C<br/>Atlanta, GA 30318"
             },
             florida: {
                 title: "Florida",
                 subtitle: "Regional Hub",
-                address: "9012 Future Rd<br/>Suite 50<br/>Orlando, FL 32801"
+                address: "Opening Fall 2026"
             }
         };
 
