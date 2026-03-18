@@ -692,7 +692,7 @@
                             <h3 class="text-2xl font-black text-slate-900 mb-6">Partnership Inquiry</h3>
                             <iframe
                                 src="https://api.leadconnectorhq.com/widget/form/ymDaEpnCZ44ybpWptay2"
-                                style="width:100%;height:100%;border:none;border-radius:25px"
+                                style="width:100%;height:1253px;border:none;border-radius:25px"
                                 id="inline-ymDaEpnCZ44ybpWptay2" 
                                 data-layout="{'id':'INLINE'}"
                                 data-trigger-type="alwaysShow"
@@ -706,6 +706,7 @@
                                 data-layout-iframe-id="inline-ymDaEpnCZ44ybpWptay2"
                                 data-form-id="ymDaEpnCZ44ybpWptay2"
                                 title="Partnership Form 10"
+                                scrolling="no"
                                     >
                             </iframe>
                             <script src="https://link.msgsndr.com/js/form_embed.js"></script>
@@ -902,6 +903,18 @@
                 }
             }, 350);
         }
+
+        // Support direct links (e.g., /#partnership) and page reloads
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1);
+            if(hash) {
+                // Determine if it should be partnership, news, etc.
+                const viewId = hash.replace('view-', '');
+                if (['about-mission', 'about-who', 'services-business', 'services-ticket', 'services-pre-employment', 'partnership', 'news', 'locations', 'careers'].includes(viewId)) {
+                    switchView(viewId);
+                }
+            }
+        });
     </script>
 </body>
 </html>
