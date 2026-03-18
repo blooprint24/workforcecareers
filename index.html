@@ -128,12 +128,12 @@
                     <div class="absolute top-full left-0 mt-2 w-64 bg-primary text-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top rotate-0 scale-95 group-hover:scale-100 overflow-hidden">
                         <a href="#services-business" onclick="switchView('services-business')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Business Solutions</a>
                         <a href="#services-ticket" onclick="switchView('services-ticket')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Ticket to Work</a>
-                        <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Pre-Employment Services</a>
-                        <a href="#partnership" onclick="switchView('partnership')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors">Partnership Form</a>
+                        <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors">Pre-Employment Services</a>
                     </div>
                 </div>
 
                 <!-- Standard Links -->
+                <a href="#partnership" onclick="switchView('partnership')" class="text-primary font-bold hover:text-accent-orange transition-colors">Partner with Us</a>
                 <a href="#news" onclick="switchView('news')" class="text-primary font-semibold hover:text-accent-orange transition-colors">News</a>
                 <a href="#locations" onclick="switchView('locations')" class="text-primary font-semibold hover:text-accent-orange transition-colors">Locations</a>
                 <a href="#careers" onclick="switchView('careers')" class="text-primary font-semibold hover:text-accent-orange transition-colors">Careers</a>
@@ -172,13 +172,15 @@
                     <a href="#services-business" onclick="switchView('services-business')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Business Solutions</a>
                     <a href="#services-ticket" onclick="switchView('services-ticket')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Ticket to Work</a>
                     <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Pre-Employment Services</a>
-                    <a href="#partnership" onclick="switchView('partnership')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Partnership Form</a>
                 </div>
-                <!-- Mobile: Standard Links -->
+
+                <!-- Mobile: More -->
                 <div class="py-2 border-t border-gray-100">
-                    <a href="#news" onclick="switchView('news')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">News</a>
-                    <a href="#locations" onclick="switchView('locations')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Locations</a>
-                    <a href="#careers" onclick="switchView('careers')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Careers</a>
+                    <div class="font-bold text-slate-400 px-3 py-2 uppercase text-[11px] tracking-wider">More</div>
+                    <a href="#partnership" onclick="switchView('partnership')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Partner with Us</a>
+                    <a href="#news" onclick="switchView('news')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">News</a>
+                    <a href="#locations" onclick="switchView('locations')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Locations</a>
+                    <a href="#careers" onclick="switchView('careers')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Careers</a>
                 </div>
             </div>
         </div>
@@ -789,44 +791,21 @@
             }
 
             const targetView = document.getElementById('view-' + viewId) || document.getElementById('view-home');
-            const activeView = document.querySelector('.view-section.block');
             
-            // Do nothing if clicking the currently active view
-            if (activeView === targetView) return;
-
-            if (activeView) {
-                // Apply fade out animation
-                activeView.classList.add('fade-out');
-                
-                // Wait for fade out to complete before swapping
-                setTimeout(() => {
-                    // Hide old view completely
-                    activeView.classList.remove('block', 'animate-fade-in', 'fade-out');
-                    activeView.classList.add('hidden');
-                    
-                    // Show new view
-                    showTargetView(targetView);
-                }, 300); // matches the 0.3s transition duration
-            } else {
-                showTargetView(targetView);
-            }
-        }
-
-        function showTargetView(targetView) {
-            targetView.classList.remove('hidden');
-            targetView.classList.add('block', 'animate-fade-in');
-            
-            // Re-trigger image animation on target view
-            const targetImgs = targetView.querySelectorAll('.animate-slide-in-image');
-            targetImgs.forEach(img => {
-                img.style.animation = 'none';
-                img.offsetHeight; /* trigger reflow */
-                img.style.animation = null;
+            // Hide all views immediately
+            document.querySelectorAll('.view-section').forEach(view => {
+                view.classList.remove('block', 'animate-fade-in', 'fade-out');
+                view.classList.add('hidden');
+                view.style.display = 'none';
+                view.style.opacity = '0';
             });
-            
-            // Critical: Force opacity and display
+
+            // Show target view immediately
+            targetView.classList.remove('hidden');
+            targetView.classList.add('block');
             targetView.style.display = 'block';
             targetView.style.opacity = '1';
+            targetView.style.minHeight = '100vh';
             
             window.scrollTo({ top: 0, behavior: 'instant' });
         }
