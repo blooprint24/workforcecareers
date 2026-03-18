@@ -128,12 +128,12 @@
                     <div class="absolute top-full left-0 mt-2 w-64 bg-primary text-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top rotate-0 scale-95 group-hover:scale-100 overflow-hidden">
                         <a href="#services-business" onclick="switchView('services-business')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Business Solutions</a>
                         <a href="#services-ticket" onclick="switchView('services-ticket')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Ticket to Work</a>
-                        <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors">Pre-Employment Services</a>
+                        <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors border-b border-primary-light/20">Pre-Employment Services</a>
+                        <a href="#partnership" onclick="switchView('partnership')" class="block px-4 py-3 text-sm hover:bg-slate-800 transition-colors">Partnership Form</a>
                     </div>
                 </div>
 
                 <!-- Standard Links -->
-                <a href="#partnership" onclick="switchView('partnership')" class="text-primary font-bold hover:text-accent-orange transition-colors">Partner with Us</a>
                 <a href="#news" onclick="switchView('news')" class="text-primary font-semibold hover:text-accent-orange transition-colors">News</a>
                 <a href="#locations" onclick="switchView('locations')" class="text-primary font-semibold hover:text-accent-orange transition-colors">Locations</a>
                 <a href="#careers" onclick="switchView('careers')" class="text-primary font-semibold hover:text-accent-orange transition-colors">Careers</a>
@@ -172,15 +172,14 @@
                     <a href="#services-business" onclick="switchView('services-business')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Business Solutions</a>
                     <a href="#services-ticket" onclick="switchView('services-ticket')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Ticket to Work</a>
                     <a href="#services-pre-employment" onclick="switchView('services-pre-employment')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Pre-Employment Services</a>
+                    <a href="#partnership" onclick="switchView('partnership')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Partnership Form</a>
                 </div>
 
-                <!-- Mobile: More -->
+                <!-- Mobile: Standard Links -->
                 <div class="py-2 border-t border-gray-100">
-                    <div class="font-bold text-slate-400 px-3 py-2 uppercase text-[11px] tracking-wider">More</div>
-                    <a href="#partnership" onclick="switchView('partnership')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Partner with Us</a>
-                    <a href="#news" onclick="switchView('news')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">News</a>
-                    <a href="#locations" onclick="switchView('locations')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Locations</a>
-                    <a href="#careers" onclick="switchView('careers')" class="block px-4 py-4 md:py-5 text-lg font-medium text-slate-700 hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Careers</a>
+                    <a href="#news" onclick="switchView('news')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">News</a>
+                    <a href="#locations" onclick="switchView('locations')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Locations</a>
+                    <a href="#careers" onclick="switchView('careers')" class="block px-4 py-4 md:py-5 text-lg font-bold text-primary hover:text-accent-orange hover:bg-slate-50 rounded-lg transition-colors">Careers</a>
                 </div>
             </div>
         </div>
@@ -699,27 +698,59 @@
                     <!-- Right: Partnership Form -->
                     <div class="bg-slate-50 p-8 md:p-10 rounded-[2.5rem] shadow-2xl border border-white relative">
                         <div class="relative z-10">
-                            <h3 class="text-2xl font-black text-slate-900 mb-6">Partnership Inquiry</h3>
-                            <iframe
-                                src="https://api.leadconnectorhq.com/widget/form/ymDaEpnCZ44ybpWptay2"
-                                style="width:100%;height:1253px;min-height:1253px;border:none;border-radius:25px;display:block;"
-                                id="inline-ymDaEpnCZ44ybpWptay2" 
-                                data-layout="{'id':'INLINE'}"
-                                data-trigger-type="alwaysShow"
-                                data-trigger-value=""
-                                data-activation-type="alwaysActivated"
-                                data-activation-value=""
-                                data-deactivation-type="neverDeactivate"
-                                data-deactivation-value=""
-                                data-form-name="Partnership Form 10"
-                                data-height="1253"
-                                data-layout-iframe-id="inline-ymDaEpnCZ44ybpWptay2"
-                                data-form-id="ymDaEpnCZ44ybpWptay2"
-                                title="Partnership Form 10"
-                                scrolling="no"
-                                    >
-                            </iframe>
-                            <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+                            <h3 class="text-2xl font-black text-slate-900 mb-6 font-display">Partnership Inquiry</h3>
+                            <form id="partnership-form" class="space-y-5">
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <div class="space-y-2">
+                                        <label class="block text-sm font-bold text-slate-700 ml-1">First Name</label>
+                                        <input type="text" required placeholder="Jane" class="w-full px-5 py-3.5 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="block text-sm font-bold text-slate-700 ml-1">Last Name</label>
+                                        <input type="text" required placeholder="Doe" class="w-full px-5 py-3.5 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400">
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-bold text-slate-700 ml-1">Organization / Company</label>
+                                    <input type="text" required placeholder="Acme Corp" class="w-full px-5 py-3.5 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-bold text-slate-700 ml-1">Work Email</label>
+                                    <input type="email" required placeholder="jane@company.com" class="w-full px-5 py-3.5 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-bold text-slate-700 ml-1">Phone Number</label>
+                                    <input type="tel" required placeholder="(555) 000-0000" class="w-full px-5 py-3.5 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-bold text-slate-700 ml-1">Service of Interest</label>
+                                    <select class="w-full px-5 py-3.5 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-slate-700 appearance-none cursor-pointer">
+                                        <option value="">Select a service...</option>
+                                        <option value="business">Business Solutions</option>
+                                        <option value="ticket">Ticket to Work</option>
+                                        <option value="pre-employment">Pre-Employment Services</option>
+                                        <option value="other">Other Inquiry</option>
+                                    </select>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-bold text-slate-700 ml-1">How can we help?</label>
+                                    <textarea rows="4" placeholder="Tell us more about your needs..." class="w-full px-5 py-3.5 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all placeholder:text-slate-400"></textarea>
+                                </div>
+
+                                <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center justify-center gap-2 mt-4">
+                                    <span>Send Inquiry</span>
+                                    <span class="material-symbols-outlined text-lg">send</span>
+                                </button>
+                                
+                                <p class="text-center text-[11px] text-slate-500 mt-4 leading-relaxed">
+                                    By submitting this form, you agree to our <a href="#" class="text-primary font-bold hover:underline">Privacy Policy</a> and <a href="#" class="text-primary font-bold hover:underline">Terms of Service</a>.
+                                </p>
+                            </form>
                         </div>
                     </div>
                 </div>
