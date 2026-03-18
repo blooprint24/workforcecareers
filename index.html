@@ -83,6 +83,14 @@
         .ticker-container:hover .animate-ticker {
             animation-play-state: paused;
         }
+
+        /* Critical Visibility Override */
+        .view-section.block {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            min-height: calc(100vh - 100px);
+        }
     </style>
 </head>
 
@@ -815,6 +823,10 @@
                 img.offsetHeight; /* trigger reflow */
                 img.style.animation = null;
             });
+            
+            // Critical: Force opacity and display
+            targetView.style.display = 'block';
+            targetView.style.opacity = '1';
             
             window.scrollTo({ top: 0, behavior: 'instant' });
         }
