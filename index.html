@@ -687,12 +687,12 @@
                     </div>
 
                     <!-- Right: Partnership Form -->
-                    <div class="bg-slate-50 p-8 md:p-10 rounded-[2.5rem] shadow-2xl border border-white relative overflow-hidden">
+                    <div class="bg-slate-50 p-8 md:p-10 rounded-[2.5rem] shadow-2xl border border-white relative">
                         <div class="relative z-10">
                             <h3 class="text-2xl font-black text-slate-900 mb-6">Partnership Inquiry</h3>
                             <iframe
                                 src="https://api.leadconnectorhq.com/widget/form/ymDaEpnCZ44ybpWptay2"
-                                style="width:100%;height:1253px;border:none;border-radius:25px"
+                                style="width:100%;height:1253px;min-height:1253px;border:none;border-radius:25px;display:block;"
                                 id="inline-ymDaEpnCZ44ybpWptay2" 
                                 data-layout="{'id':'INLINE'}"
                                 data-trigger-type="alwaysShow"
@@ -905,16 +905,23 @@
         }
 
         // Support direct links (e.g., /#partnership) and page reloads
-        window.addEventListener('DOMContentLoaded', () => {
+        function handleInitialHash() {
             const hash = window.location.hash.substring(1);
             if(hash) {
-                // Determine if it should be partnership, news, etc.
                 const viewId = hash.replace('view-', '');
-                if (['about-mission', 'about-who', 'services-business', 'services-ticket', 'services-pre-employment', 'partnership', 'news', 'locations', 'careers'].includes(viewId)) {
+                const validViews = ['about-mission', 'about-who', 'services-business', 'services-ticket', 'services-pre-employment', 'partnership', 'news', 'locations', 'careers'];
+                if (validViews.includes(viewId)) {
+                    console.log('Navigating to initial view:', viewId);
                     switchView(viewId);
                 }
             }
-        });
+        }
+
+        // Execute immediately since we are at the end of the body
+        handleInitialHash();
+        
+        // Also listen for hash changes (e.g. back button)
+        window.addEventListener('hashchange', handleInitialHash);
     </script>
 </body>
 </html>
